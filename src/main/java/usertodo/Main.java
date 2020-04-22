@@ -30,7 +30,7 @@ public class Main {
         UserTodo userTodo = UserTodo.builder()
                 .user(user)
                 .description(faker.lorem().sentence(3))
-                .priority(UserTodo.Priority.values()[faker.number().numberBetween(0, 3)])
+                .priority(faker.options().option(UserTodo.Priority.class))
                 .done(faker.bool().bool())
                 .dueDate(LocalDate.now().plusDays(faker.number().numberBetween(1, 10)))
                 .build();
@@ -74,4 +74,5 @@ public class Main {
         userTodoDao.findAll(user).stream().forEach(t -> userTodoDao.remove(t)); // Removing all remaining tasks of the user (required for being able to remove the user)
         userDao.remove(user); // Removing the user
     }
+
 }
